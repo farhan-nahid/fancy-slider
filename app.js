@@ -29,7 +29,7 @@ const getImages = (query) => {
   )
     .then((response) => response.json())
     .then((data) => showImages(data.hits))
-    .catch( error =>window.alert("Please Enter a Valid Input"))
+   // .catch( error =>window.alert("Please Enter a Valid Input"))
 }
 
 // show images
