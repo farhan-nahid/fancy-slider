@@ -56,6 +56,19 @@ img {
   display: none;
 }
 
+.card {
+  width: 20rem;
+  height: 13rem;
+  background-color: rgb(202, 190, 190);
+  margin: auto;
+  padding: 12px;
+}
+
+.card p {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
 @media (max-width: 767px) {
   .justify-content-around.align-items-center.mt-3.gallery-header.mb-2 {
     flex-direction: column;

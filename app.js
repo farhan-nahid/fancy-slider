@@ -23,7 +23,7 @@ let sliders = []
 const KEY = "15674931-a9d714b6e9d654524df198e00&q";
 
 const getImages = (query) => {
-  toggleSpinner(true);
+  spinner(true);
   fetch(
     `https://pixabay.com/api/?key=${KEY}=${query}&image_type=photo&pretty=true`
   )
@@ -38,12 +38,33 @@ const showImages = (images) => {
   gallery.innerHTML = "";
   // show gallery title
   galleryHeader.style.display = "flex";
+
+// ErrorMessage area 
+  if (images.length===0){
+    
+    if(document.querySelector('.err')) return spinner(true);
+    let div = document.createElement('div');
+
+    div.className = 'error ';
+    div.innerHTML = `
+            <div class="card mt-5 " >
+              <p class="text-center text-danger " >Sorry Your Input is Invalid !! Please Try again for Create Your Own  Slider <p>
+            </div>
+    `;
+    imagesArea.appendChild(div);
+    spinner(false);
+    return;
+  }
+  if(document.querySelector('.error')) document.querySelector('.error').remove();
+
+
+
   images.forEach((image) => {
     let div = document.createElement("div");
     div.className = "col-lg-3 col-md-4 col-xs-6 img-item mb-2";
     div.innerHTML = ` <img class="img-fluid img-thumbnail" onclick=selectItem(event,"${image.webformatURL}") src="${image.webformatURL}" alt="${image.tags}">`;
     gallery.appendChild(div);
-    toggleSpinner(false);
+    spinner(false);
   });
 };
 
@@ -85,7 +106,7 @@ const createSlider = () => {
   if (duration < 1) {
     alert("Please Enter a Positive Value");
     return;
-  } else {
+  } 
     sliders.forEach((slide) => {
       let item = document.createElement("div");
       item.className = "slider-item";
@@ -99,7 +120,7 @@ const createSlider = () => {
       slideIndex++;
       changeSlide(slideIndex);
     }, duration);
-  }
+  
 };
 
 // change slider index
@@ -140,11 +161,11 @@ sliderBtn.addEventListener("click", function () {
   createSlider();
 });
 
-const toggleSpinner = (show) => {
-  const spinner = document.getElementById("loading-spinner");
+const spinner = (show) => {
+  const spinners = document.getElementById("loading-spinner");
   if (show) {
-    spinner.classList.remove("d-none");
+    spinners.classList.remove("d-none");
   } else {
-    spinner.classList.add("d-none");
+    spinners.classList.add("d-none");
   }
 };
