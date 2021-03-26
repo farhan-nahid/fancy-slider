@@ -1,1 +1,1 @@
-# sixth-assignment
+# fancy-slider
